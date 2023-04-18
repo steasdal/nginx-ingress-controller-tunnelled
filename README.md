@@ -42,8 +42,8 @@ Take note of the full path of this file as you'll need it in the next step.
 ### Create Tunnel Credentials File Kubernetes Secret
 Turn the tunnel credentials file created in the previous step into a Kubernetes secret.  Note that we're creating
 this secret in the **ingress-nginx** namespace.  This is necessary because we're deploying `cloudflared` into the
-same namespace.  Since that namespace won't actually exist until the [deploy.yml](./deploy.yaml) file is actually
-deployed into the cluster, you may need to hold off on this step until _just_ after the [deploy.yml](./deploy.yaml)
+same namespace.  Since that namespace won't actually exist until the [deploy.yml](./deploy/deploy.yaml) file is actually
+deployed into the cluster, you may need to hold off on this step until _just_ after the [deploy.yml](./deploy/deploy.yaml)
 file is deployed in the _next_ step.
 
 Be sure to replace the path and name of the tunnel credentials file in the following command with the actual
@@ -59,7 +59,7 @@ kubectl create secret generic tunnel-credentials \
 Deploy the Nginx Ingress Controller and `cloudflared` to the Kubernetes cluster:
 
 ```bash
-kubectl apply -f deploy.yaml 
+kubectl apply -f deploy
 ```
 
 Create the tunnel credentials file secret from the previous step if you haven't already.  Maybe take a peek
@@ -121,7 +121,7 @@ an ingress in the tunnel's TLD (e.g. `teasdale.dev`).  Make sure that the ingres
 
     ingressClassName: nginx
 
-You can find the matching **IngressClass** declaration in [deploy.yaml](./deploy.yaml) (just search for `IngressClass`).
+You can find the matching **IngressClass** declaration in [deploy.yaml](./deploy/deploy.yaml) (just search for `IngressClass`).
 
 
 
